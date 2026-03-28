@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="uint8_t"/>
+		<item key="selection" value="AHB1"/>
 		<list key="findhistory">
+			<item value="AHB1"/>
 			<item value="uint8_t"/>
 			<item value="Bu"/>
 		</list>

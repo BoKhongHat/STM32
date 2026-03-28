@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Interruppt/Src/EXTI.c&apos; to &apos;NgatNgoai.c&apos;" description="Rename resource &apos;EXTI.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Src/EXTI.c" name="NgatNgoai.c" stamp="1774364073218" updateReferences="true"/>
+</session>
