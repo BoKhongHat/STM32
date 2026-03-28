@@ -1,0 +1,5 @@
+../Startup/ThuVien/stm32re.c:11:6:GPIO_Init	5
+../Startup/ThuVien/stm32re.c:45:6:GPIO_SetBits	1
+../Startup/ThuVien/stm32re.c:51:6:GPIO_ResetBits	1
+../Startup/ThuVien/stm32re.c:57:11:GPIO_ReadInputDataBit	1
+../Startup/ThuVien/stm32re.c:63:11:GPIO_ReadOutputDataBit	1

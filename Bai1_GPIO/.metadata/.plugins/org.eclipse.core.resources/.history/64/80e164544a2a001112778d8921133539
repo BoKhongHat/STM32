@@ -1,0 +1,145 @@
+/******************************************************************************/
+/* INCLUDE FILES                                 */
+/******************************************************************************/
+#include <stdint.h>
+#include <stm32f401re_gpio.h>
+#include <stm32f401re_rcc.h>
+//#include "typedefs.h"
+
+/******************************************************************************/
+/* EXPORTED TYPES and DEFINITIONS                         */
+/******************************************************************************/
+#define BTN_PRESS                           0
+
+// Define Logic GPIO_PIN
+#define GPIO_PIN_SET                        1
+#define GPIO_PIN_RESET                      0
+
+// Define GPIO PIN (Đã sửa lại chân PB4 theo đúng Bài 2)
+#define BUZZER_GPIO_PORT                    GPIOC
+#define BUZZER_GPIO_PIN                     GPIO_Pin_9
+#define BUZZERControl_SetClock              RCC_AHB1Periph_GPIOC
+
+#define BUTTON_GPIO_PORT                    GPIOB
+#define BUTTON_GPIO_PIN                     GPIO_Pin_4
+#define BUTTONControl_SetClock              RCC_AHB1Periph_GPIOB
+
+/******************************************************************************/
+/* PRIVATE FUNCTIONS                               */
+/******************************************************************************/
+static void_t buzzer_Init(void_t);
+static void_t button_Init(void_t);
+static void_t buzzerControlSetStatus(GPIO_TypeDef *pGPIOx, u16_t wGPIO_Pin, u8_t byStatus);
+static u8_t buttonReadStatus(GPIO_TypeDef *pGPIOx, u16_t wGPIO_Pin);
+void_t delay(void_t);
+
+/******************************************************************************/
+/* MAIN FUNCTION                               */
+/******************************************************************************/
+int main(void_t) {
+    u8_t buzzerStatus = 0; // Biến lưu trạng thái hiện tại của Buzzer (0: Tắt, 1: Bật)
+
+    buzzer_Init();
+    button_Init();
+
+    // Đảm bảo còi tắt khi mạch vừa khởi động
+    buzzerControlSetStatus(BUZZER_GPIO_PORT, BUZZER_GPIO_PIN, GPIO_PIN_RESET);
+
+    while (1) {
+        // Kiểm tra xem nút B5 có được nhấn hay không (Kéo xuống GND -> mức 0)
+        if (buttonReadStatus(BUTTON_GPIO_PORT, BUTTON_GPIO_PIN) == BTN_PRESS) {
+
+            delay(); // Gọi hàm delay để chống rung (Debounce)
+
+            // Kiểm tra lại lần nữa để chắc chắn đó không phải là nhiễu
+            if (buttonReadStatus(BUTTON_GPIO_PORT, BUTTON_GPIO_PIN) == BTN_PRESS) {
+
+                // Đảo trạng thái buzzer
+                buzzerStatus = !buzzerStatus;
+
+                if (buzzerStatus == 1) {
+                    buzzerControlSetStatus(BUZZER_GPIO_PORT, BUZZER_GPIO_PIN, GPIO_PIN_SET);
+                } else {
+                    buzzerControlSetStatus(BUZZER_GPIO_PORT, BUZZER_GPIO_PIN, GPIO_PIN_RESET);
+}
+
+                // Vòng lặp chờ vô tận: Giữ nguyên chương trình ở đây cho đến khi thả tay khỏi nút
+                // Điều này giúp còi chỉ đảo trạng thái 1 lần duy nhất cho 1 cú nhấn
+                while (buttonReadStatus(BUTTON_GPIO_PORT, BUTTON_GPIO_PIN) == BTN_PRESS);
+            }
+        }
+    }
+    return 0;
+}
+
+/**
+ * @func   delay
+ * @brief  Sử dụng vòng lặp for để tạo trễ (chống rung)
+ */
+void_t delay(void_t) {
+    // Thêm volatile để trình biên dịch không tối ưu hóa mất vòng lặp delay
+    for (volatile u32_t i = 0; i < 500000; i++);
+}
+
+/**
+ * @func   buzzer_Init
+ * @brief  Khởi tạo Output cho chân Buzzer
+ */
+static void_t buzzer_Init(void_t) {
+    GPIO_InitTypeDef GPIO_InitStructure;
+
+    RCC_AHB1PeriphClockCmd(BUZZERControl_SetClock, ENABLE);
+
+    GPIO_InitStructure.GPIO_Pin = BUZZER_GPIO_PIN;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
+
+    GPIO_Init(BUZZER_GPIO_PORT, &GPIO_InitStructure);
+}
+
+/**
+ * @func   button_Init
+ * @brief  Khởi tạo Input cho chân Nút bấm
+ */
+static void_t button_Init(void_t) {
+    GPIO_InitTypeDef GPIO_InitStructure;
+
+    RCC_AHB1PeriphClockCmd(BUTTONControl_SetClock, ENABLE);
+
+    GPIO_InitStructure.GPIO_Pin = BUTTON_GPIO_PIN;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+
+    GPIO_Init(BUTTON_GPIO_PORT, &GPIO_InitStructure);
+}
+
+/**
+ * @func   buzzerControlSetStatus
+ * @brief  Điều khiển trạng thái Bật/Tắt của Buzzer
+ */
+static void_t buzzerControlSetStatus(GPIO_TypeDef *pGPIOx, u16_t wGPIO_Pin, u8_t byStatus) {
+    if (byStatus == GPIO_PIN_SET) {
+        pGPIOx->BSRRL = wGPIO_Pin;
+    }
+    if (byStatus == GPIO_PIN_RESET) {
+        pGPIOx->BSRRH = wGPIO_Pin;
+    }
+}
+
+/**
+ * @func   buttonReadStatus
+ * @brief  Đọc trạng thái của nút bấm
+ */
+static u8_t buttonReadStatus(GPIO_TypeDef *pGPIOx, u16_t wGPIO_Pin) {
+    u8_t Read_Pin = Bit_RESET;
+
+    if ((pGPIOx->IDR & wGPIO_Pin) != (u32_t) Bit_RESET) {
+        Read_Pin = (u8_t) Bit_SET;   // Nút chưa được nhấn (Trạng thái Pull-up)
+    } else {
+        Read_Pin = (u8_t) Bit_RESET; // Nút đã được nhấn (Nối xuống GND)
+    }
+    return Read_Pin;
+}

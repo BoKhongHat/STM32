@@ -1,0 +1,67 @@
+/******************************************************************************/
+/* INCLUDE FILES                                 */
+/******************************************************************************/
+#include <stdint.h>
+#include <stm32f401re_rcc.h>
+#include <stm32f401re_gpio.h>
+#include <misc.h>
+#include <stm32f401re_exti.h>
+#include <stm32f401re_syscfg.h>
+
+// --- Định nghĩa lại các kiểu dữ liệu thay cho file typedefs.h ---
+typedef unsigned char  u8_t;
+typedef unsigned short u16_t;
+typedef unsigned int   u32_t;
+typedef void           void_t;
+
+/******************************************************************************/
+/* EXPORTED TYPES and DEFINITIONS                         */
+/******************************************************************************/
+#define GPIO_PIN_SET                        1
+#define GPIO_PIN_RESET                      0
+
+// Cấu hình chân LED (PA5)
+#define LED_GPIO_PORT                       GPIOA
+#define LED_GPIO_PIN                        GPIO_Pin_5
+#define LEDControl_SetClock                 RCC_AHB1Periph_GPIOA
+
+// Cấu hình chân Nút bấm (PC13)
+#define BUTTON_IT_GPIO_PORT                 GPIOC
+#define BUTTON_IT_GPIO_PIN                  GPIO_Pin_13
+#define BUTTONIT_SetClock                   RCC_AHB1Periph_GPIOC
+#define SYSCFG_Clock                        RCC_APB2Periph_SYSCFG
+
+/******************************************************************************/
+/* GLOBAL VARIABLES                              */
+/******************************************************************************/
+// Biến cờ hiệu nhận biết ngắt. Bắt buộc dùng 'volatile' khi dùng trong ngắt
+volatile u8_t Status = 0;
+
+/******************************************************************************/
+/* PRIVATE FUNCTIONS                               */
+/******************************************************************************/
+static void_t Led_Init(void_t);
+static void_t Interrupt_Init(void_t);
+static void_t LedControl_SetStatus(GPIO_TypeDef *pGPIOx, u16_t wGPIO_Pin, u8_t byStatus);
+void_t delay(void_t);
+
+/******************************************************************************/
+/* MAIN FUNCTION                                 */
+/******************************************************************************/
+int main(void_t) {
+    // 1. Cập nhật xung nhịp hệ thống [cite: 1034, 1035]
+    SystemCoreClockUpdate();
+
+    // 2. Khởi tạo ngoại vi [cite: 1036, 1037]
+    Led_Init();
+    Interrupt_Init();
+
+    // Đảm bảo LED tắt lúc mới khởi động
+    LedControl_SetStatus(LED_GPIO_PORT, LED_GPIO_PIN, GPIO_PIN_RESET);
+
+    // 3. Vòng lặp vô tận [cite: 1038]
+    while (1) {
+        // Kiểm tra xem cờ ngắt có được dựng lên không
+        if (Status == 1) {
+            // Bật LED
+            LedControl_SetStatus(LED_GPIO_PORT, LED_GPIO_PIN, GPIO_PIN_SET);

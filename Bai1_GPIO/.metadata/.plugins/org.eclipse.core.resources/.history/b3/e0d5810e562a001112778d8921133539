@@ -1,0 +1,66 @@
+/*******************************************************************************
+ * @file    stm32f401re_gpio.c
+ * @brief   GPIO driver - hiện thực Bitwise thao tác thanh ghi
+ ******************************************************************************/
+#include "stm32f401re_gpio.h"
+
+/*******************************************************************************
+ * FUNCTIONS - EXPORTED
+ ******************************************************************************/
+
+void GPIO_Init(GPIO_TypeDef *GPIOx, GPIO_InitTypeDef *GPIO_InitStruct)
+{
+    uint32_t pinpos, pos, currentpin;
+
+    for (pinpos = 0; pinpos < 16; pinpos++) {
+        pos = (1 << pinpos);
+        currentpin = GPIO_InitStruct->GPIO_Pin & pos;
+
+        if (currentpin == pos) {
+            /* *** MODER: 2 bit/chân → dịch pinpos * 2 *** */
+            /* Bước 1: Xóa bit cũ */
+            GPIOx->MODER &= ~(0x03 << (pinpos * 2));
+            /* Bước 2: Ghi giá trị mới */
+            GPIOx->MODER |= (GPIO_InitStruct->GPIO_Mode << (pinpos * 2));
+
+            if (GPIO_InitStruct->GPIO_Mode == GPIO_Mode_OUT ||
+                GPIO_InitStruct->GPIO_Mode == GPIO_Mode_AF) {
+
+                /* OSPEEDR: 2 bit/chân */
+                GPIOx->OSPEEDR &= ~(0x03 << (pinpos * 2));
+                GPIOx->OSPEEDR |=  (GPIO_InitStruct->GPIO_Speed << (pinpos * 2));
+
+                /* *** OTYPER: 1 bit/chân → KHÔNG nhân 2 *** */
+                GPIOx->OTYPER  &= ~(0x01 << pinpos);
+                GPIOx->OTYPER  |=  (GPIO_InitStruct->GPIO_OType << pinpos);
+            }
+
+            /* PUPDR: 2 bit/chân */
+            GPIOx->PUPDR &= ~(0x03 << (pinpos * 2));
+            GPIOx->PUPDR |=  (GPIO_InitStruct->GPIO_PuPd << (pinpos * 2));
+        }
+    }
+}
+
+void GPIO_SetBits(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
+{
+    /* Ghi thẳng vào BSRRL - Set bit */
+    GPIOx->BSRRL = GPIO_Pin;
+}
+
+void GPIO_ResetBits(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
+{
+    /* Ghi thẳng vào BSRRH - Reset bit */
+    GPIOx->BSRRH = GPIO_Pin;
+}
+
+BitAction GPIO_ReadInputDataBit(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
+{
+    /* Dùng toán tử & với mask để đọc bit cụ thể từ IDR */
+    return (GPIOx->IDR & GPIO_Pin) ? Bit_SET : Bit_RESET;
+}
+
+BitAction GPIO_ReadOutputDataBit(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin)
+{
+    return (GPIOx->ODR & GPIO_Pin) ? Bit_SET : Bit_RESET;
+}

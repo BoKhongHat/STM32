@@ -89,9 +89,9 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Inc"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
+						<entry excluding="NgatNgoai2.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Startup"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="ThuVien_SDK_1.0.3_NUCLEO-F401RE-master"/>
+						<entry excluding="shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401xx_gpio.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="ThuVien_SDK_1.0.3_NUCLEO-F401RE-master"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

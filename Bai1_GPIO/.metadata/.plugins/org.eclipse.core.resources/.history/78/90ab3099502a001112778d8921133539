@@ -1,0 +1,158 @@
+/******************************************************************************/
+/* INCLUDE FILES                                 */
+/******************************************************************************/
+#include <stdint.h>
+#include <stm32f401re_rcc.h>
+#include <stm32f401re_gpio.h>
+#include <misc.h>
+#include <stm32f4xx_exti.h>
+#include <stm32f4xx_syscfg.h>
+
+// --- Định nghĩa lại các kiểu dữ liệu thay cho file typedefs.h ---
+typedef unsigned char  u8_t;
+typedef unsigned short u16_t;
+typedef unsigned int   u32_t;
+typedef void           void_t;
+
+/******************************************************************************/
+/* EXPORTED TYPES and DEFINITIONS                         */
+/******************************************************************************/
+#define GPIO_PIN_SET                        1
+#define GPIO_PIN_RESET                      0
+
+// Cấu hình chân LED (PA5)
+#define LED_GPIO_PORT                       GPIOA
+#define LED_GPIO_PIN                        GPIO_Pin_5
+#define LEDControl_SetClock                 RCC_AHB1Periph_GPIOA
+
+// Cấu hình chân Nút bấm (PC13)
+#define BUTTON_IT_GPIO_PORT                 GPIOC
+#define BUTTON_IT_GPIO_PIN                  GPIO_Pin_13
+#define BUTTONIT_SetClock                   RCC_AHB1Periph_GPIOC
+#define SYSCFG_Clock                        RCC_APB2Periph_SYSCFG
+
+/******************************************************************************/
+/* GLOBAL VARIABLES                              */
+/******************************************************************************/
+// Biến cờ hiệu nhận biết ngắt. Bắt buộc dùng 'volatile' khi dùng trong ngắt
+volatile u8_t Status = 0;
+
+/******************************************************************************/
+/* PRIVATE FUNCTIONS                               */
+/******************************************************************************/
+static void_t Led_Init(void_t);
+static void_t Interrupt_Init(void_t);
+static void_t LedControl_SetStatus(GPIO_TypeDef *pGPIOx, u16_t wGPIO_Pin, u8_t byStatus);
+void_t delay(void_t);
+
+/******************************************************************************/
+/* MAIN FUNCTION                                 */
+/******************************************************************************/
+int main(void_t) {
+    // 1. Cập nhật xung nhịp hệ thống  1034, 1035]
+    SystemCoreClockUpdate();
+
+    // 2. Khởi tạo ngoại vi  1036, 1037]
+    Led_Init();
+    Interrupt_Init();
+
+    // Đảm bảo LED tắt lúc mới khởi động
+    LedControl_SetStatus(LED_GPIO_PORT, LED_GPIO_PIN, GPIO_PIN_RESET);
+
+    // 3. Vòng lặp vô tận  1038]
+    while (1) {
+        // Kiểm tra xem cờ ngắt có được dựng lên không
+        if (Status == 1) {
+            // Bật LED
+            LedControl_SetStatus(LED_GPIO_PORT, LED_GPIO_PIN, GPIO_PIN_SET);
+            // Giữ LED sáng một khoảng thời gian để mắt người kịp nhìn thấy
+                        delay();
+
+                        // Tắt LED trở lại trạng thái ban đầu  944]
+                        LedControl_SetStatus(LED_GPIO_PORT, LED_GPIO_PIN, GPIO_PIN_RESET);
+
+                        // Xóa cờ hiệu để chờ lần bấm nút tiếp theo
+                        Status = 0;
+                    }
+                }
+                return 0;
+            }
+
+            /******************************************************************************/
+            /* INTERRUPT SERVICE ROUTINE                          */
+            /******************************************************************************/
+            // Hàm phục vụ ngắt cho các chân từ 10 đến 15  1007, 1023]
+            void EXTI15_10_IRQHandler(void) {
+                // Kiểm tra xem ngắt có thực sự đến từ Line 13 (PC13) hay không  1019, 1026]
+                if(EXTI_GetFlagStatus(EXTI_Line13) == SET) {
+
+                    // Báo hiệu cho hàm main() biết đã có sự kiện bấm nút  1029]
+                    Status = 1;
+
+                    // QUAN TRỌNG: Phải xóa cờ ngắt, nếu không chương trình sẽ bị treo  1020, 1031]
+                    EXTI_ClearITPendingBit(EXTI_Line13);
+                }
+            }
+
+            /******************************************************************************/
+            /* HARDWARE INIT FUNCTIONS                            */
+            /******************************************************************************/
+            static void_t Led_Init(void_t) {
+                GPIO_InitTypeDef GPIO_InitStructure;
+
+                RCC_AHB1PeriphClockCmd(LEDControl_SetClock, ENABLE);
+
+                GPIO_InitStructure.GPIO_Pin = LED_GPIO_PIN;
+                GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+                GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+                GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+                GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
+
+                GPIO_Init(LED_GPIO_PORT, &GPIO_InitStructure);             }
+
+            static void_t Interrupt_Init(void_t) {
+                GPIO_InitTypeDef GPIO_InitStructure;
+                EXTI_InitTypeDef EXTI_InitStructure;]
+                NVIC_InitTypeDef NVIC_InitStructure;
+
+                // 1. Cấu hình chân PC13 làm ngõ vào  970]
+                RCC_AHB1PeriphClockCmd(BUTTONIT_SetClock, ENABLE);
+                GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+                GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+                GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+                GPIO_InitStructure.GPIO_Pin = BUTTON_IT_GPIO_PIN;
+                GPIO_Init(BUTTON_IT_GPIO_PORT, &GPIO_InitStructure);
+
+                // 2. Kết nối PC13 với Line ngắt 13  985]
+                RCC_APB2PeriphClockCmd(SYSCFG_Clock, ENABLE);
+                SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOC, EXTI_PinSource13);
+
+                // 3. Cấu hình bộ ngắt ngoài EXTI  994]
+                EXTI_InitStructure.EXTI_Line = EXTI_Line13;
+                EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+                EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
+                EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+                EXTI_Init(&EXTI_InitStructure);
+
+                // 4. Cấu hình trình quản lý ngắt NVIC  1006]
+                NVIC_InitStructure.NVIC_IRQChannel = EXTI15_10_IRQn;
+                NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+                NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+                NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+                NVIC_Init(&NVIC_InitStructure);
+            }
+
+            static void_t LedControl_SetStatus(GPIO_TypeDef *pGPIOx, u16_t wGPIO_Pin, u8_t byStatus) {
+                if (byStatus == GPIO_PIN_SET) {
+                    pGPIOx->BSRRL = wGPIO_Pin;
+                }
+                if (byStatus == GPIO_PIN_RESET) {
+                    pGPIOx->BSRRH = wGPIO_Pin;
+                }
+            }
+
+            void_t delay(void_t) {
+                for (volatile u32_t i = 0; i < 1000000; i++);
+            }
+        }
+}

@@ -5642,202 +5642,203 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x08000000                g_pfnVectors
                 0x08000194                        . = ALIGN (0x4)
 
-.text           0x08000194      0x734
+.text           0x08000194      0x73c
                 0x08000194                        . = ALIGN (0x4)
  *(.text)
  .text          0x08000194       0x40 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
  *(.text*)
- .text.delay    0x080001d4       0x2c ./Src/main.o
-                0x080001d4                delay
+ .text.Delay    0x080001d4       0x2a ./Src/main.o
+                0x080001d4                Delay
+ *fill*         0x080001fe        0x2 
  .text.Led_Init
                 0x08000200       0x3c ./Src/main.o
  .text.Button_Init
                 0x0800023c       0x34 ./Src/main.o
  .text.LedControl_SetStatus
-                0x08000270       0x60 ./Src/main.o
+                0x08000270       0x44 ./Src/main.o
  .text.ButtonRead_Status
-                0x080002d0       0x2e ./Src/main.o
- *fill*         0x080002fe        0x2 
- .text.main     0x08000300       0x60 ./Src/main.o
-                0x08000300                main
+                0x080002b4       0x2e ./Src/main.o
+ *fill*         0x080002e2        0x2 
+ .text.main     0x080002e4       0x84 ./Src/main.o
+                0x080002e4                main
  .text.Reset_Handler
-                0x08000360       0x50 ./Startup/startup_stm32f401retx.o
-                0x08000360                Reset_Handler
+                0x08000368       0x50 ./Startup/startup_stm32f401retx.o
+                0x08000368                Reset_Handler
  .text.Default_Handler
-                0x080003b0        0x2 ./Startup/startup_stm32f401retx.o
-                0x080003b0                EXTI2_IRQHandler
-                0x080003b0                DebugMon_Handler
-                0x080003b0                SPI4_IRQHandler
-                0x080003b0                TIM1_CC_IRQHandler
-                0x080003b0                DMA2_Stream5_IRQHandler
-                0x080003b0                HardFault_Handler
-                0x080003b0                DMA1_Stream5_IRQHandler
-                0x080003b0                SDIO_IRQHandler
-                0x080003b0                TAMP_STAMP_IRQHandler
-                0x080003b0                PendSV_Handler
-                0x080003b0                NMI_Handler
-                0x080003b0                EXTI3_IRQHandler
-                0x080003b0                TIM1_UP_TIM10_IRQHandler
-                0x080003b0                I2C3_ER_IRQHandler
-                0x080003b0                EXTI18_OTG_FS_WKUP_IRQHandler
-                0x080003b0                EXTI0_IRQHandler
-                0x080003b0                I2C2_EV_IRQHandler
-                0x080003b0                DMA1_Stream2_IRQHandler
-                0x080003b0                UsageFault_Handler
-                0x080003b0                DMA2_Stream2_IRQHandler
-                0x080003b0                SPI1_IRQHandler
-                0x080003b0                TIM1_BRK_TIM9_IRQHandler
-                0x080003b0                DMA2_Stream3_IRQHandler
-                0x080003b0                USART6_IRQHandler
-                0x080003b0                DMA2_Stream0_IRQHandler
-                0x080003b0                TIM4_IRQHandler
-                0x080003b0                I2C1_EV_IRQHandler
-                0x080003b0                DMA1_Stream6_IRQHandler
-                0x080003b0                DMA1_Stream1_IRQHandler
-                0x080003b0                TIM3_IRQHandler
-                0x080003b0                RCC_IRQHandler
-                0x080003b0                Default_Handler
-                0x080003b0                EXTI15_10_IRQHandler
-                0x080003b0                ADC_IRQHandler
-                0x080003b0                DMA1_Stream7_IRQHandler
-                0x080003b0                TIM5_IRQHandler
-                0x080003b0                DMA2_Stream7_IRQHandler
-                0x080003b0                I2C3_EV_IRQHandler
-                0x080003b0                EXTI9_5_IRQHandler
-                0x080003b0                SPI2_IRQHandler
-                0x080003b0                MemManage_Handler
-                0x080003b0                DMA1_Stream0_IRQHandler
-                0x080003b0                SVC_Handler
-                0x080003b0                EXTI4_IRQHandler
-                0x080003b0                EXTI22_RTC_WKUP_IRQHandler
-                0x080003b0                TIM2_IRQHandler
-                0x080003b0                EXTI16_PVD_IRQHandler
-                0x080003b0                TIM1_TRG_COM_TIM11_IRQHandler
-                0x080003b0                EXTI1_IRQHandler
-                0x080003b0                EXTI17_RTC_Alarm_IRQHandler
-                0x080003b0                I2C2_ER_IRQHandler
-                0x080003b0                DMA2_Stream1_IRQHandler
-                0x080003b0                FLASH_IRQHandler
-                0x080003b0                DMA2_Stream4_IRQHandler
-                0x080003b0                BusFault_Handler
-                0x080003b0                USART1_IRQHandler
-                0x080003b0                OTG_FS_IRQHandler
-                0x080003b0                SPI3_IRQHandler
-                0x080003b0                DMA1_Stream4_IRQHandler
-                0x080003b0                I2C1_ER_IRQHandler
-                0x080003b0                DMA2_Stream6_IRQHandler
-                0x080003b0                DMA1_Stream3_IRQHandler
- *fill*         0x080003b2        0x2 
+                0x080003b8        0x2 ./Startup/startup_stm32f401retx.o
+                0x080003b8                EXTI2_IRQHandler
+                0x080003b8                DebugMon_Handler
+                0x080003b8                SPI4_IRQHandler
+                0x080003b8                TIM1_CC_IRQHandler
+                0x080003b8                DMA2_Stream5_IRQHandler
+                0x080003b8                HardFault_Handler
+                0x080003b8                DMA1_Stream5_IRQHandler
+                0x080003b8                SDIO_IRQHandler
+                0x080003b8                TAMP_STAMP_IRQHandler
+                0x080003b8                PendSV_Handler
+                0x080003b8                NMI_Handler
+                0x080003b8                EXTI3_IRQHandler
+                0x080003b8                TIM1_UP_TIM10_IRQHandler
+                0x080003b8                I2C3_ER_IRQHandler
+                0x080003b8                EXTI18_OTG_FS_WKUP_IRQHandler
+                0x080003b8                EXTI0_IRQHandler
+                0x080003b8                I2C2_EV_IRQHandler
+                0x080003b8                DMA1_Stream2_IRQHandler
+                0x080003b8                UsageFault_Handler
+                0x080003b8                DMA2_Stream2_IRQHandler
+                0x080003b8                SPI1_IRQHandler
+                0x080003b8                TIM1_BRK_TIM9_IRQHandler
+                0x080003b8                DMA2_Stream3_IRQHandler
+                0x080003b8                USART6_IRQHandler
+                0x080003b8                DMA2_Stream0_IRQHandler
+                0x080003b8                TIM4_IRQHandler
+                0x080003b8                I2C1_EV_IRQHandler
+                0x080003b8                DMA1_Stream6_IRQHandler
+                0x080003b8                DMA1_Stream1_IRQHandler
+                0x080003b8                TIM3_IRQHandler
+                0x080003b8                RCC_IRQHandler
+                0x080003b8                Default_Handler
+                0x080003b8                EXTI15_10_IRQHandler
+                0x080003b8                ADC_IRQHandler
+                0x080003b8                DMA1_Stream7_IRQHandler
+                0x080003b8                TIM5_IRQHandler
+                0x080003b8                DMA2_Stream7_IRQHandler
+                0x080003b8                I2C3_EV_IRQHandler
+                0x080003b8                EXTI9_5_IRQHandler
+                0x080003b8                SPI2_IRQHandler
+                0x080003b8                MemManage_Handler
+                0x080003b8                DMA1_Stream0_IRQHandler
+                0x080003b8                SVC_Handler
+                0x080003b8                EXTI4_IRQHandler
+                0x080003b8                EXTI22_RTC_WKUP_IRQHandler
+                0x080003b8                TIM2_IRQHandler
+                0x080003b8                EXTI16_PVD_IRQHandler
+                0x080003b8                TIM1_TRG_COM_TIM11_IRQHandler
+                0x080003b8                EXTI1_IRQHandler
+                0x080003b8                EXTI17_RTC_Alarm_IRQHandler
+                0x080003b8                I2C2_ER_IRQHandler
+                0x080003b8                DMA2_Stream1_IRQHandler
+                0x080003b8                FLASH_IRQHandler
+                0x080003b8                DMA2_Stream4_IRQHandler
+                0x080003b8                BusFault_Handler
+                0x080003b8                USART1_IRQHandler
+                0x080003b8                OTG_FS_IRQHandler
+                0x080003b8                SPI3_IRQHandler
+                0x080003b8                DMA1_Stream4_IRQHandler
+                0x080003b8                I2C1_ER_IRQHandler
+                0x080003b8                DMA2_Stream6_IRQHandler
+                0x080003b8                DMA1_Stream3_IRQHandler
+ *fill*         0x080003ba        0x2 
  .text.SystemInit
-                0x080003b4       0x6c ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
-                0x080003b4                SystemInit
+                0x080003bc       0x6c ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
+                0x080003bc                SystemInit
  .text.SetSysClock
-                0x08000420       0xa4 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
+                0x08000428       0xa4 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
  .text.GPIO_Init
-                0x080004c4      0x11e ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_gpio.o
-                0x080004c4                GPIO_Init
- *fill*         0x080005e2        0x2 
+                0x080004cc      0x11e ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_gpio.o
+                0x080004cc                GPIO_Init
+ *fill*         0x080005ea        0x2 
  .text.RCC_AHB1PeriphClockCmd
-                0x080005e4       0x40 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
-                0x080005e4                RCC_AHB1PeriphClockCmd
+                0x080005ec       0x40 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
+                0x080005ec                RCC_AHB1PeriphClockCmd
  .text.USART_ReceiveData
-                0x08000624       0x20 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
-                0x08000624                USART_ReceiveData
+                0x0800062c       0x20 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
+                0x0800062c                USART_ReceiveData
  .text.USART_GetITStatus
-                0x08000644       0xb6 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
-                0x08000644                USART_GetITStatus
+                0x0800064c       0xb6 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
+                0x0800064c                USART_GetITStatus
  .text.USART_ClearITPendingBit
-                0x080006fa       0x3a ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
-                0x080006fa                USART_ClearITPendingBit
+                0x08000702       0x3a ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
+                0x08000702                USART_ClearITPendingBit
  .text.SysTick_Handler
-                0x08000734       0x1c ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
-                0x08000734                SysTick_Handler
+                0x0800073c       0x1c ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
+                0x0800073c                SysTick_Handler
  .text.USART2_IRQHandler
-                0x08000750       0x54 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
-                0x08000750                USART2_IRQHandler
+                0x08000758       0x54 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
+                0x08000758                USART2_IRQHandler
  .text.bufIsFull
-                0x080007a4       0x26 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
-                0x080007a4                bufIsFull
+                0x080007ac       0x26 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
+                0x080007ac                bufIsFull
  .text.bufEnDat
-                0x080007ca       0x9e ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
-                0x080007ca                bufEnDat
+                0x080007d2       0x9e ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
+                0x080007d2                bufEnDat
  .text.__libc_init_array
-                0x08000868       0x48 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-init.o)
-                0x08000868                __libc_init_array
+                0x08000870       0x48 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libc_nano.a(libc_a-init.o)
+                0x08000870                __libc_init_array
  *(.glue_7)
- .glue_7        0x080008b0        0x0 linker stubs
+ .glue_7        0x080008b8        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x080008b0        0x0 linker stubs
+ .glue_7t       0x080008b8        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x080008b0        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .eh_frame      0x080008b8        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
  *(.init)
- .init          0x080008b0        0x4 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crti.o
-                0x080008b0                _init
- .init          0x080008b4        0x8 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtn.o
+ .init          0x080008b8        0x4 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crti.o
+                0x080008b8                _init
+ .init          0x080008bc        0x8 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtn.o
  *(.fini)
- .fini          0x080008bc        0x4 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crti.o
-                0x080008bc                _fini
- .fini          0x080008c0        0x8 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtn.o
-                0x080008c8                        . = ALIGN (0x4)
-                0x080008c8                        _etext = .
+ .fini          0x080008c4        0x4 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crti.o
+                0x080008c4                _fini
+ .fini          0x080008c8        0x8 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtn.o
+                0x080008d0                        . = ALIGN (0x4)
+                0x080008d0                        _etext = .
 
-.vfp11_veneer   0x080008c8        0x0
- .vfp11_veneer  0x080008c8        0x0 linker stubs
+.vfp11_veneer   0x080008d0        0x0
+ .vfp11_veneer  0x080008d0        0x0 linker stubs
 
-.v4_bx          0x080008c8        0x0
- .v4_bx         0x080008c8        0x0 linker stubs
+.v4_bx          0x080008d0        0x0
+ .v4_bx         0x080008d0        0x0 linker stubs
 
-.iplt           0x080008c8        0x0
- .iplt          0x080008c8        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+.iplt           0x080008d0        0x0
+ .iplt          0x080008d0        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.rodata         0x080008c8        0x0
-                0x080008c8                        . = ALIGN (0x4)
+.rodata         0x080008d0        0x0
+                0x080008d0                        . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
-                0x080008c8                        . = ALIGN (0x4)
+                0x080008d0                        . = ALIGN (0x4)
 
-.ARM.extab      0x080008c8        0x0
-                0x080008c8                        . = ALIGN (0x4)
+.ARM.extab      0x080008d0        0x0
+                0x080008d0                        . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x080008c8                        . = ALIGN (0x4)
+                0x080008d0                        . = ALIGN (0x4)
 
-.ARM            0x080008c8        0x0
-                0x080008c8                        . = ALIGN (0x4)
-                0x080008c8                        __exidx_start = .
+.ARM            0x080008d0        0x0
+                0x080008d0                        . = ALIGN (0x4)
+                0x080008d0                        __exidx_start = .
  *(.ARM.exidx*)
-                0x080008c8                        __exidx_end = .
-                0x080008c8                        . = ALIGN (0x4)
+                0x080008d0                        __exidx_end = .
+                0x080008d0                        . = ALIGN (0x4)
 
-.preinit_array  0x080008c8        0x0
-                0x080008c8                        . = ALIGN (0x4)
-                0x080008c8                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x080008d0        0x0
+                0x080008d0                        . = ALIGN (0x4)
+                0x080008d0                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x080008c8                        PROVIDE (__preinit_array_end = .)
-                0x080008c8                        . = ALIGN (0x4)
+                0x080008d0                        PROVIDE (__preinit_array_end = .)
+                0x080008d0                        . = ALIGN (0x4)
 
-.init_array     0x080008c8        0x4
-                0x080008c8                        . = ALIGN (0x4)
-                0x080008c8                        PROVIDE (__init_array_start = .)
+.init_array     0x080008d0        0x4
+                0x080008d0                        . = ALIGN (0x4)
+                0x080008d0                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x080008c8        0x4 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
-                0x080008cc                        PROVIDE (__init_array_end = .)
-                0x080008cc                        . = ALIGN (0x4)
+ .init_array    0x080008d0        0x4 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x080008d4                        PROVIDE (__init_array_end = .)
+                0x080008d4                        . = ALIGN (0x4)
 
-.fini_array     0x080008cc        0x4
-                0x080008cc                        . = ALIGN (0x4)
+.fini_array     0x080008d4        0x4
+                0x080008d4                        . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x080008cc        0x4 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .fini_array    0x080008d4        0x4 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x080008d0                        . = ALIGN (0x4)
-                0x080008d0                        _sidata = LOADADDR (.data)
+                0x080008d8                        . = ALIGN (0x4)
+                0x080008d8                        _sidata = LOADADDR (.data)
 
-.rel.dyn        0x080008d0        0x0
- .rel.iplt      0x080008d0        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+.rel.dyn        0x080008d8        0x0
+ .rel.iplt      0x080008d8        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.data           0x20000000        0x0 load address 0x080008d0
+.data           0x20000000        0x0 load address 0x080008d8
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -5847,11 +5848,11 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _edata = .
 
-.igot.plt       0x20000000        0x0 load address 0x080008d0
+.igot.plt       0x20000000        0x0 load address 0x080008d8
  .igot.plt      0x20000000        0x0 C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard/crtbegin.o
                 0x20000000                        . = ALIGN (0x4)
 
-.bss            0x20000000       0x28 load address 0x080008d0
+.bss            0x20000000       0x28 load address 0x080008d8
                 0x20000000                        _sbss = .
                 0x20000000                        __bss_start__ = _sbss
  *(.bss)
@@ -5867,7 +5868,7 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x20000028                        __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x20000028      0x600 load address 0x080008d0
+                0x20000028      0x600 load address 0x080008d8
                 0x20000028                        . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
                 0x20000028                        PROVIDE (_end = .)
@@ -5917,27 +5918,27 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
 LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard\libm.a
 LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7e-m+fp/hard\libgcc.a
 
-.debug_info     0x00000000     0x3f72
- .debug_info    0x00000000      0x3e4 ./Src/main.o
- .debug_info    0x000003e4       0x30 ./Startup/startup_stm32f401retx.o
- .debug_info    0x00000414      0x593 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
- .debug_info    0x000009a7      0x60c ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_gpio.o
- .debug_info    0x00000fb3      0xce0 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
- .debug_info    0x00001c93      0x9c2 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
- .debug_info    0x00002655      0x949 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
- .debug_info    0x00002f9e      0xccf ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
- .debug_info    0x00003c6d      0x305 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
+.debug_info     0x00000000     0x3f80
+ .debug_info    0x00000000      0x3f2 ./Src/main.o
+ .debug_info    0x000003f2       0x30 ./Startup/startup_stm32f401retx.o
+ .debug_info    0x00000422      0x593 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
+ .debug_info    0x000009b5      0x60c ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_gpio.o
+ .debug_info    0x00000fc1      0xce0 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
+ .debug_info    0x00001ca1      0x9c2 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
+ .debug_info    0x00002663      0x949 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
+ .debug_info    0x00002fac      0xccf ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
+ .debug_info    0x00003c7b      0x305 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
 
-.debug_abbrev   0x00000000     0x1032
- .debug_abbrev  0x00000000      0x1d4 ./Src/main.o
- .debug_abbrev  0x000001d4       0x24 ./Startup/startup_stm32f401retx.o
- .debug_abbrev  0x000001f8      0x144 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
- .debug_abbrev  0x0000033c      0x1ee ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_gpio.o
- .debug_abbrev  0x0000052a      0x1e1 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
- .debug_abbrev  0x0000070b      0x1b1 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
- .debug_abbrev  0x000008bc      0x2e6 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
- .debug_abbrev  0x00000ba2      0x354 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
- .debug_abbrev  0x00000ef6      0x13c ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
+.debug_abbrev   0x00000000     0x1034
+ .debug_abbrev  0x00000000      0x1d6 ./Src/main.o
+ .debug_abbrev  0x000001d6       0x24 ./Startup/startup_stm32f401retx.o
+ .debug_abbrev  0x000001fa      0x144 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
+ .debug_abbrev  0x0000033e      0x1ee ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_gpio.o
+ .debug_abbrev  0x0000052c      0x1e1 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
+ .debug_abbrev  0x0000070d      0x1b1 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
+ .debug_abbrev  0x000008be      0x2e6 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
+ .debug_abbrev  0x00000ba4      0x354 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
+ .debug_abbrev  0x00000ef8      0x13c ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
 
 .debug_aranges  0x00000000      0x500
  .debug_aranges
@@ -5960,86 +5961,86 @@ LOAD C:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
                 0x000004b0       0x50 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
 
 .debug_rnglists
-                0x00000000      0x3a7
+                0x00000000      0x3a8
  .debug_rnglists
-                0x00000000       0x31 ./Src/main.o
+                0x00000000       0x32 ./Src/main.o
  .debug_rnglists
-                0x00000031       0x19 ./Startup/startup_stm32f401retx.o
+                0x00000032       0x19 ./Startup/startup_stm32f401retx.o
  .debug_rnglists
-                0x0000004a       0x21 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
+                0x0000004b       0x21 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
  .debug_rnglists
-                0x0000006b       0x64 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_gpio.o
+                0x0000006c       0x64 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_gpio.o
  .debug_rnglists
-                0x000000cf      0x12e ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
+                0x000000d0      0x12e ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
  .debug_rnglists
-                0x000001fd       0xbf ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
+                0x000001fe       0xbf ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
  .debug_rnglists
-                0x000002bc       0x54 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
+                0x000002bd       0x54 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
  .debug_rnglists
-                0x00000310       0x5e ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
+                0x00000311       0x5e ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
  .debug_rnglists
-                0x0000036e       0x39 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
+                0x0000036f       0x39 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
 
-.debug_macro    0x00000000     0xbb7e
- .debug_macro   0x00000000      0x116 ./Src/main.o
- .debug_macro   0x00000116      0xac0 ./Src/main.o
- .debug_macro   0x00000bd6       0x22 ./Src/main.o
- .debug_macro   0x00000bf8       0x8e ./Src/main.o
- .debug_macro   0x00000c86       0x51 ./Src/main.o
- .debug_macro   0x00000cd7      0x103 ./Src/main.o
- .debug_macro   0x00000dda       0x6a ./Src/main.o
- .debug_macro   0x00000e44      0x1df ./Src/main.o
- .debug_macro   0x00001023       0x6b ./Src/main.o
- .debug_macro   0x0000108e       0x3b ./Src/main.o
- .debug_macro   0x000010c9       0x34 ./Src/main.o
- .debug_macro   0x000010fd       0x26 ./Src/main.o
- .debug_macro   0x00001123      0xe43 ./Src/main.o
- .debug_macro   0x00001f66     0x8018 ./Src/main.o
- .debug_macro   0x00009f7e      0x2ee ./Src/main.o
- .debug_macro   0x0000a26c      0x64a ./Src/main.o
- .debug_macro   0x0000a8b6       0xce ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
- .debug_macro   0x0000a984       0xc3 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_gpio.o
- .debug_macro   0x0000aa47      0x18d ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
- .debug_macro   0x0000abd4      0x644 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
- .debug_macro   0x0000b218       0xdb ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
- .debug_macro   0x0000b2f3      0x21d ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
- .debug_macro   0x0000b510       0xe3 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
- .debug_macro   0x0000b5f3       0x1c ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
- .debug_macro   0x0000b60f      0x10a ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
- .debug_macro   0x0000b719      0x16a ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
- .debug_macro   0x0000b883      0x223 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
- .debug_macro   0x0000baa6       0xc2 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
- .debug_macro   0x0000bb68       0x16 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
+.debug_macro    0x00000000     0xbb72
+ .debug_macro   0x00000000      0x10a ./Src/main.o
+ .debug_macro   0x0000010a      0xac0 ./Src/main.o
+ .debug_macro   0x00000bca       0x22 ./Src/main.o
+ .debug_macro   0x00000bec       0x8e ./Src/main.o
+ .debug_macro   0x00000c7a       0x51 ./Src/main.o
+ .debug_macro   0x00000ccb      0x103 ./Src/main.o
+ .debug_macro   0x00000dce       0x6a ./Src/main.o
+ .debug_macro   0x00000e38      0x1df ./Src/main.o
+ .debug_macro   0x00001017       0x6b ./Src/main.o
+ .debug_macro   0x00001082       0x3b ./Src/main.o
+ .debug_macro   0x000010bd       0x34 ./Src/main.o
+ .debug_macro   0x000010f1       0x26 ./Src/main.o
+ .debug_macro   0x00001117      0xe43 ./Src/main.o
+ .debug_macro   0x00001f5a     0x8018 ./Src/main.o
+ .debug_macro   0x00009f72      0x2ee ./Src/main.o
+ .debug_macro   0x0000a260      0x64a ./Src/main.o
+ .debug_macro   0x0000a8aa       0xce ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
+ .debug_macro   0x0000a978       0xc3 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_gpio.o
+ .debug_macro   0x0000aa3b      0x18d ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
+ .debug_macro   0x0000abc8      0x644 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
+ .debug_macro   0x0000b20c       0xdb ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
+ .debug_macro   0x0000b2e7      0x21d ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
+ .debug_macro   0x0000b504       0xe3 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
+ .debug_macro   0x0000b5e7       0x1c ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
+ .debug_macro   0x0000b603      0x10a ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
+ .debug_macro   0x0000b70d      0x16a ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
+ .debug_macro   0x0000b877      0x223 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
+ .debug_macro   0x0000ba9a       0xc2 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
+ .debug_macro   0x0000bb5c       0x16 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
 
-.debug_line     0x00000000     0x4ed7
- .debug_line    0x00000000      0x6a8 ./Src/main.o
- .debug_line    0x000006a8       0x7b ./Startup/startup_stm32f401retx.o
- .debug_line    0x00000723      0x6c9 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
- .debug_line    0x00000dec      0x97d ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_gpio.o
- .debug_line    0x00001769      0xea6 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
- .debug_line    0x0000260f      0xc0d ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
- .debug_line    0x0000321c      0xa20 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
- .debug_line    0x00003c3c      0xaf3 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
- .debug_line    0x0000472f      0x7a8 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
+.debug_line     0x00000000     0x4eeb
+ .debug_line    0x00000000      0x6bc ./Src/main.o
+ .debug_line    0x000006bc       0x7b ./Startup/startup_stm32f401retx.o
+ .debug_line    0x00000737      0x6c9 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
+ .debug_line    0x00000e00      0x97d ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_gpio.o
+ .debug_line    0x0000177d      0xea6 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
+ .debug_line    0x00002623      0xc0d ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
+ .debug_line    0x00003230      0xa20 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
+ .debug_line    0x00003c50      0xaf3 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
+ .debug_line    0x00004743      0x7a8 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
 
-.debug_str      0x00000000    0x3e7ba
- .debug_str     0x00000000    0x3a5ed ./Src/main.o
-                              0x3a7be (size before relaxing)
- .debug_str     0x0003a5ed       0x3f ./Startup/startup_stm32f401retx.o
+.debug_str      0x00000000    0x3e7bc
+ .debug_str     0x00000000    0x3a5ef ./Src/main.o
+                              0x3a7b9 (size before relaxing)
+ .debug_str     0x0003a5ef       0x3f ./Startup/startup_stm32f401retx.o
                                  0x67 (size before relaxing)
- .debug_str     0x0003a62c      0x2cf ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
+ .debug_str     0x0003a62e      0x2cf ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/CMSIS/Source/system_stm32f4xx.o
                               0x359a4 (size before relaxing)
- .debug_str     0x0003a8fb      0x21e ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_gpio.o
+ .debug_str     0x0003a8fd      0x21e ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_gpio.o
                               0x3a80d (size before relaxing)
- .debug_str     0x0003ab19      0xbfa ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
+ .debug_str     0x0003ab1b      0xbfa ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_rcc.o
                               0x39bf7 (size before relaxing)
- .debug_str     0x0003b713     0x1a06 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
+ .debug_str     0x0003b715     0x1a06 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Drivers/STM32F401RE_StdPeriph_Driver/src/stm32f401re_usart.o
                               0x3a934 (size before relaxing)
- .debug_str     0x0003d119      0x6d5 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
+ .debug_str     0x0003d11b      0x6d5 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/rtos/timer.o
                               0x395e7 (size before relaxing)
- .debug_str     0x0003d7ee      0xeea ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
+ .debug_str     0x0003d7f0      0xeea ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/serial/serial.o
                               0x3cf2e (size before relaxing)
- .debug_str     0x0003e6d8       0xe2 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
+ .debug_str     0x0003e6da       0xe2 ./ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Utilities/buff.o
                               0x3589b (size before relaxing)
 
 .comment        0x00000000       0x43

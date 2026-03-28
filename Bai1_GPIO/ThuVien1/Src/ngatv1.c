@@ -1,0 +1,192 @@
+/*******************************************************************************
+ * File name: main.c
+ * Description: Bài Lab - Cấu hình ngắt ngoài EXTI trên STM32F401
+ * Nhấn nút PC13 -> Ngắt -> Đảo trạng thái LED PA5
+ ******************************************************************************/
+
+/* INCLUDE FILES                                 */
+#include <stdint.h>
+#include <stm32re.h>
+#include <gpio.h>
+//#include <misc.h>                 // Cấu hình NVIC
+#include <stm32f4xx_exti.h>       // Cấu hình EXTI (Đã sửa tiền tố f4xx)
+#include <stm32f4xx_syscfg.h>     // Kết nối GPIO với EXTI Line (Đã sửa tiền tố f4xx)
+
+/******************************************************************************/
+/* DEFINITIONS & MACROS                                */
+/******************************************************************************/
+// Logic Level
+#define GPIO_PIN_SET                    1
+#define GPIO_PIN_RESET                  0
+
+// LED - PA5
+#define LED_GPIO_PORT                   GPIOA
+#define LED_GPIO_PIN                    GPIO_Pin_5
+#define LEDControl_SetClock             RCC_AHB1Periph_GPIOA
+
+// BUTTON - PC13 (Nút User trên board)
+#define BUTTON_GPIO_PORT                GPIOC
+#define BUTTON_GPIO_PIN                 GPIO_Pin_13
+#define BUTTONControl_SetClock          RCC_AHB1Periph_GPIOC
+
+// EXTI
+#define BUTTON_EXTI_LINE                EXTI_Line13
+#define BUTTON_EXTI_PORT_SOURCE         EXTI_PortSourceGPIOC
+#define BUTTON_EXTI_PIN_SOURCE          EXTI_PinSource13
+#define BUTTON_EXTI_IRQn                EXTI15_10_IRQn  // Quản lý EXTI Line 10-15
+
+/******************************************************************************/
+/* GLOBAL VARIABLES                              */
+/******************************************************************************/
+// Biến toàn cục: ISR ghi, main() đọc
+volatile uint8_t g_buttonStatus = 0;
+
+/******************************************************************************/
+/* PRIVATE FUNCTION PROTOTYPES                        */
+/******************************************************************************/
+static void Led_Init(void);
+static void Interrupt_Init(void);
+static void LedControl_SetStatus(GPIO_TypeDef *pGPIOx, uint16_t wGPIO_Pin, uint8_t byStatus); // Bổ sung dấu *
+void delay(void); // Khai báo hàm trễ
+
+/******************************************************************************/
+/* MAIN FUNCTION                                 */
+/******************************************************************************/
+int main(void)
+{
+    // Bước 6: Cập nhật biến SystemCoreClock theo clock thực tế của MCU
+    SystemCoreClockUpdate();
+
+    // Bước 7: Khởi tạo LED và Ngắt ngoài
+    Led_Init();
+    Interrupt_Init();
+
+    // Đảm bảo LED tắt khi mới khởi động
+    LedControl_SetStatus(LED_GPIO_PORT, LED_GPIO_PIN, GPIO_PIN_RESET);
+
+    // Bước 8: Vòng lặp chính - chỉ theo dõi biến cờ từ ISR
+    while (1)
+    {
+        if (g_buttonStatus == 1)
+        {
+            // Xử lý sự kiện: Bật LED sáng
+            LedControl_SetStatus(LED_GPIO_PORT, LED_GPIO_PIN, GPIO_PIN_SET);
+
+            // Giữ cho LED sáng một lúc để mắt người nhìn thấy
+            delay();
+
+            // Xóa cờ để chờ sự kiện tiếp theo
+            g_buttonStatus = 0;
+        }
+        else
+        {
+            // Không có sự kiện: Tắt LED
+            LedControl_SetStatus(LED_GPIO_PORT, LED_GPIO_PIN, GPIO_PIN_RESET);
+        }
+    }
+    return 0;
+}
+
+/******************************************************************************/
+/* INTERRUPT SERVICE ROUTINE                          */
+/******************************************************************************/
+/**
+ * @func   EXTI15_10_IRQHandler
+ * @brief  Bước 5 - Hàm phục vụ ngắt cho EXTI Line 10~15
+ */
+void EXTI15_10_IRQHandler(void)
+{
+    // Xác nhận ngắt phát ra từ đúng Line 13
+    if (EXTI_GetFlagStatus(BUTTON_EXTI_LINE) != RESET)
+    {
+        // Báo hiệu cho main() biết sự kiện đã xảy ra
+        g_buttonStatus = 1;
+
+        // !!! QUAN TRỌNG: Xóa cờ ngắt
+        EXTI_ClearITPendingBit(BUTTON_EXTI_LINE);
+    }
+}
+
+/******************************************************************************/
+/* PRIVATE FUNCTIONS                                */
+/******************************************************************************/
+/**
+ * @func   Led_Init
+ * @brief  Bước 3 - Cấu hình PA5 ở chế độ Output cho LED
+ */
+static void Led_Init(void)
+{
+    GPIO_InitTypeDef GPIO_InitStructure;
+
+    RCC_AHB1PeriphClockCmd(LEDControl_SetClock, ENABLE);
+    GPIO_InitStructure.GPIO_Pin   = LED_GPIO_PIN;
+    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_OUT;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_DOWN;
+    GPIO_Init(LED_GPIO_PORT, &GPIO_InitStructure);
+}
+
+/**
+ * @func   Interrupt_Init
+ * @brief  Bước 4 - Cấu hình ngắt ngoài trên PC13
+ */
+static void Interrupt_Init(void)
+{
+    GPIO_InitTypeDef  GPIO_InitStructure;
+    EXTI_InitTypeDef  EXTI_InitStructure;
+    NVIC_InitTypeDef  NVIC_InitStructure;
+
+    /*--- [1] Cấu hình chân PC13 làm Input ---*/
+    RCC_AHB1PeriphClockCmd(BUTTONControl_SetClock, ENABLE);
+    GPIO_InitStructure.GPIO_Pin   = BUTTON_GPIO_PIN;
+    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IN;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_UP;
+    GPIO_Init(BUTTON_GPIO_PORT, &GPIO_InitStructure);
+
+    /*--- [2] Kết nối PC13 vào EXTI Line 13 qua SYSCFG ---*/
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+    SYSCFG_EXTILineConfig(BUTTON_EXTI_PORT_SOURCE, BUTTON_EXTI_PIN_SOURCE);
+
+    /*--- [3] Kích hoạt và cấu hình EXTI Line 13 ---*/
+    EXTI_InitStructure.EXTI_Line    = BUTTON_EXTI_LINE;
+    EXTI_InitStructure.EXTI_Mode    = EXTI_Mode_Interrupt;
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+    EXTI_Init(&EXTI_InitStructure);
+
+    /*--- [4] Phân quyền ưu tiên ngắt trong NVIC ---*/
+    NVIC_InitStructure.NVIC_IRQChannel                   = BUTTON_EXTI_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority        = 0;
+    NVIC_InitStructure.NVIC_IRQChannelCmd                = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
+}
+
+/**
+ * @func   LedControl_SetStatus
+ * @brief  Bước 6 - Bật / Tắt LED qua thanh ghi BSRR
+ */
+static void LedControl_SetStatus(GPIO_TypeDef *pGPIOx, uint16_t wGPIO_Pin, uint8_t byStatus)
+{
+    if (byStatus == GPIO_PIN_SET)
+    {
+        pGPIOx->BSRRL = wGPIO_Pin;
+    }
+    else
+    {
+        pGPIOx->BSRRH = wGPIO_Pin;
+    }
+}
+
+/**
+ * @func   delay
+ * @brief  Tạo trễ hiển thị bằng vòng lặp rỗng
+ */
+void delay(void)
+{
+    for (volatile uint32_t i = 0; i < 1000000; i++);
+}
+
+

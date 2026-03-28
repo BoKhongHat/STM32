@@ -70,8 +70,8 @@ all: main-build
 main-build: Interruppt.elf secondary-outputs
 
 # Tool invocations
-Interruppt.elf Interruppt.map: $(OBJS) $(USER_OBJS) D:\Study_Loc\STM32\API\STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Interruppt.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\Study_Loc\STM32\API\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Interruppt.map" -Wl,--gc-sections -static -L"C:\Users\ADMIN\OneDrive\Máy tính\N23DCCI041-Tran Tien Loc\STUDY\Exam3k1\ThuVien_SDK_1.0.3_NUCLEO-F401RE-master\lib_stm" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Interruppt.elf Interruppt.map: $(OBJS) $(USER_OBJS) D:\Study_Loc\STM32\GPIO\API\STM32F401RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Interruppt.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\Study_Loc\STM32\GPIO\API\STM32F401RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Interruppt.map" -Wl,--gc-sections -static -L"C:\Users\ADMIN\OneDrive\Máy tính\N23DCCI041-Tran Tien Loc\STUDY\Exam3k1\ThuVien_SDK_1.0.3_NUCLEO-F401RE-master\lib_stm" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

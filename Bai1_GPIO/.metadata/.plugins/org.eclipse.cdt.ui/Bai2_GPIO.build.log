@@ -1,10 +1,10 @@
-09:45:20 **** Build of configuration Debug for project Bai2_GPIO ****
+10:07:56 **** Incremental Build of configuration Debug for project Bai2_GPIO ****
 make -j12 all 
 arm-none-eabi-size  Bai2_GPIO.elf 
    text	   data	    bss	    dec	    hex	filename
-   2260	      0	   1576	   3836	    efc	Bai2_GPIO.elf
+   2296	      0	   1576	   3872	    f20	Bai2_GPIO.elf
 Finished building: default.size.stdout
  
 
-09:45:21 Build Finished. 0 errors, 0 warnings. (took 1s.60ms)
+10:07:56 Build Finished. 0 errors, 0 warnings. (took 305ms)
 
