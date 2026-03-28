@@ -1,0 +1,4 @@
+C:/Users/ADMIN/OneDrive/Máy tính/N23DCCI041-Tran Tien Loc/STUDY/Exam3k1/ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/sensor/lightsensor.c:50:1:LightSensor_Init	128	static
+C:/Users/ADMIN/OneDrive/Máy tính/N23DCCI041-Tran Tien Loc/STUDY/Exam3k1/ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/sensor/lightsensor.c:146:1:LightSensor_MeasureUseDMAMode	4	static
+C:/Users/ADMIN/OneDrive/Máy tính/N23DCCI041-Tran Tien Loc/STUDY/Exam3k1/ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/sensor/lightsensor.c:157:1:LightSensor_MeasureUsePollingMode	16	static
+C:/Users/ADMIN/OneDrive/Máy tính/N23DCCI041-Tran Tien Loc/STUDY/Exam3k1/ThuVien_SDK_1.0.3_NUCLEO-F401RE-master/shared/Middle/sensor/lightsensor.c:180:1:LightSensor_SendPacketRespond	32	static

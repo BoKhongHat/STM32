@@ -1,0 +1,4 @@
+../Src/main.c:87:13:Led_Init	1
+../Src/main.c:106:13:Buzzer_Init	1
+../Src/main.c:125:13:ButtonB2_Init	1
+../Src/main.c:145:5:main	2
